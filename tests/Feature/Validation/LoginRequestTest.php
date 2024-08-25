@@ -41,5 +41,14 @@ class LoginRequestTest extends TestCase
         $this->assertFalse($validator->fails());
     }
 
+    public function test_invalid_request()
+    {
+        $data = [];
 
+        $request = new LoginRequest();
+        $request->replace($data);
+
+        $validator = Validator::make($request->all(), $request->rules());
+        $this->assertTrue($validator->fails());
+    }
 }
