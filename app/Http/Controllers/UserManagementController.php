@@ -60,7 +60,7 @@ class UserManagementController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**

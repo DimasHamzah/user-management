@@ -73,4 +73,23 @@ class UserManagementControllerTest extends TestCase
        });
    }
 
+   public function test_edit_when_dont_have_permission()
+   {
+       $user = User::factory()->create();
+
+       $response = $this->get(route('user-management.edit', $user->id));
+
+       $response->assertStatus(302);
+       $response->assertRedirect(route('login'));
+   }
+
+   public function test_edit_when_have_permission()
+   {
+       $user = User::factory()->create();
+       $response = $this->actingAs($user)->get(route('user-management.edit', $user->id));
+       $response->assertStatus(200);
+       $response->assertViewIs('users.edit');
+       $response->assertViewHas('user', $user);
+   }
+
 }
