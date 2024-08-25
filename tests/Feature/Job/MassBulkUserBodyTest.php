@@ -24,6 +24,7 @@ class MassBulkUserBodyTest extends TestCase
                 'password' => 'password123',
             ];
         }
+
         MassBuildUserBody::dispatch($users);
 
 
