@@ -58,23 +58,23 @@ class UserManagementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user): View
+    public function edit(User $user_management): View
     {
-        return view('users.edit', compact('user'));
+        return view('users.edit', compact('user_management'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequestUpdate $request, User $user): RedirectResponse
+    public function update(UserRequestUpdate $request, User $user_management): RedirectResponse
     {
         $validated = $request->validated();
 
         if (isset($validated['password'])) {
-            $user->password = Hash::make($validated['password']);
+            $user_management->password = Hash::make($validated['password']);
         }
 
-        $user->update($validated);
+        $user_management->update($validated);
 
         return redirect()->route('user-management.index')->with('success', 'User updated successfully');
     }
@@ -82,9 +82,9 @@ class UserManagementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user): RedirectResponse
+    public function destroy(User $user_management): RedirectResponse
     {
-        $user->delete();
+        $user_management->delete();
 
         return redirect()->route('user-management.index')->with('success', 'User deleted successfully');
     }

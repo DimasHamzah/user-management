@@ -15,8 +15,13 @@
                             <x-item.text-list-heading :label="$user->email" />
                             <x-item.text-list :label="$user->name" />
                             <x-item.text-list :label="$user->created_at" />
-                            <td class="px-6 py-4">
-                              <x-button.button-delete />
+                            <td class="px-6 py-4 flex space-x-4">
+                                <x-button.button-update />
+                                <form action="{{ route('user-management.update', $user) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <x-button.button-delete />
+                                </form>
                             </td>
                         </tr>
                     @endforeach

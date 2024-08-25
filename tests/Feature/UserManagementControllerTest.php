@@ -87,7 +87,7 @@ class UserManagementControllerTest extends TestCase
        $response = $this->actingAs($user)->get(route('user-management.edit', $user->id));
        $response->assertStatus(200);
        $response->assertViewIs('users.edit');
-       $response->assertViewHas('user');
+       $response->assertViewHas('user_management');
    }
 
    public function test_update_when_dont_have_permission()
@@ -99,10 +99,9 @@ class UserManagementControllerTest extends TestCase
 
    public function test_update_when_validation_errors()
    {
-       $user = User::factory()->create();
+       $user_management = User::factory()->create();
 
-
-       $response = $this->actingAs($user)->put(route('user-management.update', 1), []);
+       $response = $this->actingAs($user_management)->put(route('user-management.update', $user_management->id), []);
 
        $response->assertStatus(302);
        $response->assertSessionHasErrors(['name' => 'The name field is required.']);
