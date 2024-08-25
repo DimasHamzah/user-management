@@ -1,6 +1,6 @@
 # Dokumentasi Rute Aplikasi
 
-Dokumentasi ini menjelaskan rute-rute yang tersedia dalam aplikasi, termasuk API dan web. Harap merujuk ke tabel berikut untuk detail tentang setiap rute.
+Dokumentasi ini menjelaskan rute-rute yang tersedia dalam aplikasi, termasuk API dan web. untuk  mass user saya membuat dua, yaitu get (api/mass-user) dan post (api/mass-user/body), kenapa membuat dua, karena dari pada memasukan 1000 data melalui postman lebih baik saya buatkan faker di queuenya, tetapi jika mau menggunakan yang postman, maka gunakan  api/mass-user/body
 
 ## Rute API
 
