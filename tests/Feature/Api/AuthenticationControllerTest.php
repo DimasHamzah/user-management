@@ -18,5 +18,10 @@ class AuthenticationControllerTest extends TestCase
         $response = $this->post('/api/auth/login', $data);
 
         $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['email','password']);
+        $response->assertJsonFragment([
+            'email' => ['The email field must be a valid email address.'],
+            'password' => ['The password field is required.']
+        ]);
     }
 }
