@@ -98,4 +98,20 @@ class UserManagementControllerTest extends TestCase
        $response->assertStatus(302);
        $response->assertRedirect(route('login'));
    }
+
+   public function test_update_when_have_permission()
+   {
+       $user = User::factory()->create();
+
+       $data = [
+           'name' => 'testing user',
+           'email' => fake()->unique()->email,
+           'password' => 'Password'
+       ];
+
+       $response = $this->actingAs($user)->put(route('user-management.update', $user->id), $data);
+       $response->assertStatus(302);
+       $response->assertRedirect(route('user-management.index'));
+       $response->assertSessionHas('success', 'User updated successfully');
+   }
 }
