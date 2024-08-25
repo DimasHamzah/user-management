@@ -16,11 +16,11 @@ Route::middleware('log-http')->group(function () {
    Route::post('register', RegisterController::class);
 });
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', 'log-http'])->group(function () {
    Route::get('/users', [UserManagementController::class, 'index']);
    Route::post('/users', [UserManagementController::class, 'store']);
    Route::put('/users/{user}', [UserManagementController::class, 'update']);
    Route::delete('users/{user}', [UserManagementController::class, 'destroy']);
 });
 
-Route::get('mass-user', CreateManyUserController::class);
+Route::get('mass-user', CreateManyUserController::class)->middleware('log-http');

@@ -22,9 +22,6 @@ class LogHttpRequest
             'timestamp' => now()->toDateTimeString(),
             'method' => $request->method(),
             'uri' => $request->fullUrl(),
-            'headers' => $request->headers->all(),
-            'body' => $request->all(),
-            'ip_address' => $request->ip(),
             'user_id' => auth()->check() ? auth()->id() : null
         ]);
 
@@ -36,7 +33,6 @@ class LogHttpRequest
         Log::info('response', [
             'timestamp' => now()->toDateTimeString(),
             'status' => $response->getStatusCode(),
-            'headers' => $response->headers->all(),
             'duration' => $duration
         ]);
 

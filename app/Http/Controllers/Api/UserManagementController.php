@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequestStore;
-use App\Http\Requests\UserRequestUpdate;
 use App\Mail\ConfirmationCreateUser;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -41,9 +41,13 @@ class UserManagementController extends Controller
             ->setStatusCode(201);
     }
 
-    public function update(UserRequestUpdate $request, User $user): JsonResponse
+    public function update(Request $request, User $user): JsonResponse
     {
-        $validated = $request->validated();
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'nullable|email|unique:users,email',
+            'password' => 'nullable',
+        ]);
 
         $user->update($validated);
 
