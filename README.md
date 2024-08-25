@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/57ad36cd-6d68-41a4-adf6-1ffda3d4a665)# Dokumentasi Rute Aplikasi
+# Dokumentasi Rute Aplikasi
 
 ## requirment
 - ** Setup Laravel Project with Basic Authentication: **
