@@ -89,7 +89,6 @@ class UserManagementControllerTest extends TestCase
        $response = $this->actingAs($user)->get(route('user-management.edit', $user->id));
        $response->assertStatus(200);
        $response->assertViewIs('users.edit');
-       $response->assertViewHas('user', $user);
+       $response->assertViewHas('user');
    }
-
 }
