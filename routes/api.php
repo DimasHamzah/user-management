@@ -17,4 +17,7 @@ Route::middleware('log-http')->group(function () {
 
 Route::middleware(['auth:sanctum'])->group(function () {
    Route::get('/users', [UserManagementController::class, 'index']);
+   Route::post('/users', [UserManagementController::class, 'store']);
+   Route::put('/users/{user}', [UserManagementController::class, 'update']);
+   Route::delete('users/{user}', [UserManagementController::class, 'destroy']);
 });
