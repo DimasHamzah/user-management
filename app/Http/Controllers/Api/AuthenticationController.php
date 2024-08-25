@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
-    public function __invoke(LoginRequest $request)
+    public function __invoke(LoginRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
