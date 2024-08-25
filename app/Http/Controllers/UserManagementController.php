@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequestStore;
+use App\Http\Requests\UserRequestUpdate;
 use App\Mail\ConfirmationCreateUser;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -66,9 +67,17 @@ class UserManagementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequestUpdate $request, User $user): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        if (isset($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('user-management.index')->with('success', 'User updated successfully');
     }
 
     /**
