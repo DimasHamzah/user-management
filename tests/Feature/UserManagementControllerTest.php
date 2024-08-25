@@ -42,4 +42,27 @@ class UserManagementControllerTest extends TestCase
        $response->assertViewIs('users.create');
    }
 
+   public function test_store_when_dont_have_permission()
+   {
+       $response = $this->post(route('user-management.store'));
+       $response->assertStatus(302);
+       $response->assertRedirect(route('login'));
+   }
+
+   public function test_store_when_have_permission()
+   {
+       $user = User::factory()->create();
+
+       $data = [
+           'name' => 'testing user',
+           'email' => fake()->unique()->email,
+           'password' => 'Password'
+       ];
+
+       $response = $this->actingAs($user)->post(route('user-management.store'), $data);
+       $response->assertStatus(302);
+       $response->assertRedirect(route('user-management.index'));
+       $response->assertSessionHas('success', 'success create user');
+   }
+
 }
