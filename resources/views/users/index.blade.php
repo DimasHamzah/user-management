@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('User Management') }}
-        </h2>
+       <div class="w-full md:max-w-2xl lg:max-w-4xl xl:max-w-7xl mx-auto px-4 flex justify-between">
+           <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+               {{ __('User Management') }}
+           </h2>
+
+           <a href="#" class="flex space-x-2 bg-blue-700 px-4 py-2 rounded cursor-pointer">
+               <x-icon.create-user-icon />
+               <p class="text-base text-white font-bold">Create User</p>
+           </a>
+       </div>
     </x-slot>
 
     <section class="w-full md:max-w-2xl lg:max-w-4xl xl:max-w-7xl mx-auto px-4">
