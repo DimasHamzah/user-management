@@ -4,8 +4,6 @@ namespace Tests\Feature;
 
 use App\Mail\ConfirmationCreateUser;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
@@ -97,6 +95,17 @@ class UserManagementControllerTest extends TestCase
        $response = $this->put(route('user-management.update', 1));
        $response->assertStatus(302);
        $response->assertRedirect(route('login'));
+   }
+
+   public function test_update_when_validation_errors()
+   {
+       $user = User::factory()->create();
+
+
+       $response = $this->actingAs($user)->put(route('user-management.update', 1), []);
+
+       $response->assertStatus(302);
+       $response->assertSessionHasErrors(['name' => 'The name field is required.']);
    }
 
    public function test_update_when_have_permission()
