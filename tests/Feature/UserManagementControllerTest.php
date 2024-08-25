@@ -91,4 +91,11 @@ class UserManagementControllerTest extends TestCase
        $response->assertViewIs('users.edit');
        $response->assertViewHas('user');
    }
+
+   public function test_update_when_dont_have_permission()
+   {
+       $response = $this->put(route('user-management.update', 1));
+       $response->assertStatus(302);
+       $response->assertRedirect(route('login'));
+   }
 }
