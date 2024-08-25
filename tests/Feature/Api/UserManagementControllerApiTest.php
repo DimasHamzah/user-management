@@ -10,7 +10,13 @@ class UserManagementControllerApiTest extends TestCase
 {
     public function test_index_failed()
     {
-        $response = $this->get('/api/users');
-        $response->assertStatus(404);
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => ''
+        ])->get('api/users');
+        $response->assertStatus(422);
+        $response->assertJson([
+            "message" => "Unauthenticated."
+        ]);
     }
 }
