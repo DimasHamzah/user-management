@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Validation;
 
+use App\Http\Requests\Api\RegisterRequest;
 use Illuminate\Support\Facades\Validator;
 use Tests\TestCase;
 
