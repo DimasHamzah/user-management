@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\UserManagementController;
 use App\Http\Controllers\Api\CreateManyUserController;
 use App\Http\Controllers\Api\MassUserController;
+use App\Http\Controllers\Api\LogoutController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -26,3 +27,4 @@ Route::middleware(['auth:sanctum', 'log-http'])->group(function () {
 
 Route::get('mass-user', CreateManyUserController::class)->middleware('log-http');
 Route::post('mass-user/body', MassUserController::class)->middleware('log-http');
+Route::post('logout', LogoutController::class)->middleware(['auth:sanctum', 'log-http']);
