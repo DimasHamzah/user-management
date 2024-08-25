@@ -123,4 +123,21 @@ class UserManagementControllerTest extends TestCase
        $response->assertRedirect(route('user-management.index'));
        $response->assertSessionHas('success', 'User updated successfully');
    }
+
+   public function test_destroy_when_dont_have_permission()
+   {
+       $response = $this->delete(route('user-management.destroy', 1));
+       $response->assertStatus(302);
+       $response->assertRedirect(route('login'));
+   }
+
+   public function test_destroy_when_have_permission()
+   {
+       $user = User::factory()->create();
+
+       $response = $this->delete(route('user-management.destroy', $user->id));
+       $response->assertStatus(302);
+       $response->assertRedirect(route('user-management.index'));
+       $response->assertSessionHas('success', 'User deleted successfully');
+   }
 }
