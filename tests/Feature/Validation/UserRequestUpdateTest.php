@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\validation;
+namespace Tests\Feature\Validation;
 
 use App\Http\Requests\UserRequestUpdate;
 use Tests\TestCase;
