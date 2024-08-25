@@ -39,7 +39,7 @@ class UserManagementControllerTest extends TestCase
 
        $response = $this->actingAs($user)->get(route('user-management.create'));
        $response->assertStatus(200);
-       $response->assertViewHas('users.create');
-
+       $response->assertViewIs('users.create');
    }
+
 }
