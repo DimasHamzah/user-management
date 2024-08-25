@@ -1,121 +1,95 @@
-# Dokumentasi API Laravel
+# Dokumentasi Rute Aplikasi
 
-Dokumentasi ini menjelaskan rute yang tersedia dalam aplikasi Laravel Anda, dibagi menjadi dua kategori: **Rute Web** dan **Rute API**.
-
-## Rute Web
-
-### 1. **Root Route**
-- **URL**: `/`
-- **Method**: `GET|HEAD`
-- **Deskripsi**: Halaman utama aplikasi.
-
-### 2. **Dashboard**
-- **URL**: `dashboard`
-- **Method**: `GET|HEAD`
-- **Deskripsi**: Halaman dashboard pengguna.
-
-### 3. **Email Verification**
-- **Verification Notification**
-  - **URL**: `email/verification-notification`
-  - **Method**: `POST`
-  - **Controller**: `Auth\EmailVerificationNotificationController@store`
-  - **Deskripsi**: Mengirimkan email verifikasi ulang.
-
-- **Verify Email**
-  - **URL**: `verify-email`
-  - **Method**: `GET|HEAD`
-  - **Controller**: `Auth\EmailVerificationPromptController`
-  - **Deskripsi**: Menampilkan halaman verifikasi email.
-
-  - **URL**: `verify-email/{id}/{hash}`
-  - **Method**: `GET|HEAD`
-  - **Controller**: `Auth\VerifyEmailController`
-  - **Deskripsi**: Mengonfirmasi email verifikasi.
-
-### 4. **Profile Management**
-- **Profile Edit**
-  - **URL**: `profile`
-  - **Method**: `GET|HEAD`
-  - **Controller**: `ProfileController@edit`
-  - **Deskripsi**: Menampilkan halaman edit profil pengguna.
-
-  - **URL**: `profile`
-  - **Method**: `PATCH`
-  - **Controller**: `ProfileController@update`
-  - **Deskripsi**: Memperbarui data profil pengguna.
-
-  - **URL**: `profile`
-  - **Method**: `DELETE`
-  - **Controller**: `ProfileController@destroy`
-  - **Deskripsi**: Menghapus profil pengguna.
+Dokumentasi ini mencakup semua rute yang tersedia dalam aplikasi, baik untuk API maupun rute web.
 
 ## Rute API
 
-### 1. **Autentikasi API**
-- **Login**
-  - **URL**: `api/auth/login`
-  - **Method**: `POST`
-  - **Controller**: `Api\AuthenticationController`
-  - **Deskripsi**: Melakukan login pengguna.
+| Metode | URL                                      | Controller / Fungsi                                      |
+|--------|------------------------------------------|----------------------------------------------------------|
+| POST   | `api/auth/login`                         | `Api\AuthenticationController@login`                     |
+| POST   | `api/logout`                             | `Api\LogoutController@logout`                            |
+| GET    | `api/mass-user`                          | `Api\CreateManyUserController@index`                     |
+| POST   | `api/mass-user/body`                     | `Api\MassUserController@store`                           |
+| POST   | `api/register`                           | `Api\RegisterController@register`                        |
+| GET    | `api/user`                               | `Api\UserController@show`                                |
+| GET    | `api/users`                              | `Api\UserManagementController@index`                     |
+| POST   | `api/users`                              | `Api\UserManagementController@store`                     |
+| PUT    | `api/users/{user}`                       | `Api\UserManagementController@update`                    |
+| DELETE | `api/users/{user}`                       | `Api\UserManagementController@destroy`                   |
 
-- **Register**
-  - **URL**: `api/register`
-  - **Method**: `POST`
-  - **Controller**: `Api\RegisterController`
-  - **Deskripsi**: Mendaftarkan pengguna baru.
+## Rute Web
 
-- **Logout**
-  - **URL**: `api/logout`
-  - **Method**: `POST`
-  - **Controller**: `Auth\AuthenticatedSessionController@destroy`
-  - **Deskripsi**: Melakukan logout pengguna.
+| Metode | URL                                      | Controller / Fungsi                                      |
+|--------|------------------------------------------|----------------------------------------------------------|
+| GET    | `confirm-password`                       | `Auth\ConfirmablePasswordController@show`                |
+| POST   | `confirm-password`                       | `Auth\ConfirmablePasswordController@store`               |
+| GET    | `dashboard`                              | `DashboardController@index`                             |
+| POST   | `email/verification-notification`        | `Auth\EmailVerificationNotificationController@store`    |
+| GET    | `forgot-password`                        | `Auth\PasswordResetLinkController@create`               |
+| POST   | `forgot-password`                        | `Auth\PasswordResetLinkController@store`                |
+| GET    | `login`                                  | `Auth\AuthenticatedSessionController@create`            |
+| POST   | `login`                                  | `Auth\AuthenticatedSessionController@store`             |
+| POST   | `logout`                                 | `Auth\AuthenticatedSessionController@destroy`           |
+| PUT    | `password`                               | `Auth\PasswordController@update`                        |
+| GET    | `profile`                                | `ProfileController@edit`                                |
+| PATCH  | `profile`                                | `ProfileController@update`                              |
+| DELETE | `profile`                                | `ProfileController@destroy`                             |
+| GET    | `register`                               | `Auth\RegisteredUserController@create`                  |
+| POST   | `register`                               | `Auth\RegisteredUserController@store`                   |
+| POST   | `reset-password`                         | `Auth\NewPasswordController@store`                      |
+| GET    | `reset-password/{token}`                  | `Auth\NewPasswordController@create`                     |
+| GET    | `sanctum/csrf-cookie`                    | `Laravel\Sanctum\CsrfCookieController@show`             |
+| GET    | `up`                                      | `HealthCheckController@status`                          |
+| GET    | `user-management`                        | `UserManagementController@index`                        |
+| POST   | `user-management`                        | `UserManagementController@store`                        |
+| GET    | `user-management/create`                 | `UserManagementController@create`                       |
+| GET    | `user-management/{user_management}`      | `UserManagementController@show`                         |
+| PUT    | `user-management/{user_management}`      | `UserManagementController@update`                       |
+| PATCH  | `user-management/{user_management}`      | `UserManagementController@update`                       |
+| DELETE | `user-management/{user_management}`      | `UserManagementController@destroy`                      |
+| GET    | `user-management/{user_management}/edit` | `UserManagementController@edit`                         |
+| GET    | `verify-email`                           | `Auth\EmailVerificationPromptController@show`           |
+| GET    | `verify-email/{id}/{hash}`               | `Auth\VerifyEmailController@verify`                     |
 
-### 2. **User Management API**
-- **List Users**
-  - **URL**: `api/users`
-  - **Method**: `GET|HEAD`
-  - **Controller**: `Api\UserManagementController@index`
-  - **Deskripsi**: Menampilkan daftar pengguna.
+## Penjelasan Rute
 
-- **Create User**
-  - **URL**: `api/users`
-  - **Method**: `POST`
-  - **Controller**: `Api\UserManagementController@store`
-  - **Deskripsi**: Menambahkan pengguna baru.
+### Rute API
+- **`POST api/auth/login`**: Digunakan untuk autentikasi pengguna.
+- **`POST api/logout`**: Digunakan untuk logout pengguna.
+- **`GET api/mass-user`**: Mengambil data pengguna dalam jumlah besar.
+- **`POST api/mass-user/body`**: Menambahkan banyak pengguna sekaligus.
+- **`POST api/register`**: Digunakan untuk mendaftar pengguna baru.
+- **`GET api/user`**: Mengambil data pengguna saat ini.
+- **`GET api/users`**: Mengambil daftar semua pengguna.
+- **`POST api/users`**: Menambahkan pengguna baru.
+- **`PUT api/users/{user}`**: Memperbarui data pengguna tertentu.
+- **`DELETE api/users/{user}`**: Menghapus pengguna tertentu.
 
-- **Update User**
-  - **URL**: `api/users/{user}`
-  - **Method**: `PUT`
-  - **Controller**: `Api\UserManagementController@update`
-  - **Deskripsi**: Memperbarui data pengguna.
+### Rute Web
+- **`confirm-password`**: Menampilkan form konfirmasi kata sandi.
+- **`dashboard`**: Halaman utama dashboard pengguna.
+- **`email/verification-notification`**: Mengirim notifikasi verifikasi email.
+- **`forgot-password`**: Menampilkan form untuk reset kata sandi.
+- **`login`**: Menampilkan form login.
+- **`logout`**: Menghentikan sesi pengguna.
+- **`password`**: Memperbarui kata sandi pengguna.
+- **`profile`**: Menampilkan dan mengedit profil pengguna.
+- **`register`**: Menampilkan form pendaftaran pengguna baru.
+- **`reset-password`**: Menetapkan kata sandi baru setelah reset.
+- **`sanctum/csrf-cookie`**: Mendapatkan cookie CSRF untuk Laravel Sanctum.
+- **`up`**: Memeriksa status aplikasi (health check).
+- **`user-management`**: Mengelola daftar pengguna.
+- **`verify-email`**: Menampilkan notifikasi verifikasi email.
+- **`verify-email/{id}/{hash}`**: Memverifikasi email pengguna.
 
-- **Delete User**
-  - **URL**: `api/users/{user}`
-  - **Method**: `DELETE`
-  - **Controller**: `Api\UserManagementController@destroy`
-  - **Deskripsi**: Menghapus pengguna.
+## Kontribusi
 
-### 3. **Mass User Creation API**
-- **Mass User Creation**
-  - **URL**: `api/mass-user`
-  - **Method**: `GET|HEAD`
-  - **Controller**: `Api\CreateManyUserController`
-  - **Deskripsi**: Endpoint untuk memproses pembuatan pengguna massal secara otomatis.
+Jika Anda menemukan masalah atau ingin menambahkan fitur baru, silakan lakukan fork dari repositori ini dan kirimkan pull request dengan perubahan yang diusulkan.
 
-- **Mass User Creation with Body**
-  - **URL**: `api/mass-user/body`
-  - **Method**: `POST`
-  - **Controller**: `Api\MassUserController`
-  - **Deskripsi**: Mengirimkan data pengguna dalam jumlah besar melalui body permintaan.
+## Lisensi
 
-### 4. **CSRF Cookie**
-- **URL**: `sanctum/csrf-cookie`
-- **Method**: `GET|HEAD`
-- **Controller**: `Laravel\Sanctum\CsrfCookieController@show`
-- **Deskripsi**: Mengambil cookie CSRF untuk Laravel Sanctum.
+Aplikasi ini dilisensikan di bawah [MIT License](LICENSE).
 
-## Catatan
-- **Manajemen Profil**: Rute manajemen profil telah dihapus dari dokumentasi ini sesuai permintaan.
-- **Pemisahan Rute**: Rute telah dipisahkan berdasarkan kategori untuk memudahkan pemahaman dan pengelolaan.
+---
 
-Dokumentasi ini dirancang untuk memberikan panduan lengkap mengenai rute web dan API dalam aplikasi Laravel Anda. Pastikan untuk memeriksa detail implementasi pada kode sumber dan menyesuaikan dengan kebutuhan spesifik proyek Anda.
+Untuk pertanyaan atau masalah lainnya, buka masalah di repositori atau hubungi tim pengembang.
