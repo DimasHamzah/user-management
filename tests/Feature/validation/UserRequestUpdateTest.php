@@ -14,4 +14,5 @@ class UserRequestUpdateTest extends TestCase
         $this->assertTrue($request->authorize());
     }
 
+
 }
