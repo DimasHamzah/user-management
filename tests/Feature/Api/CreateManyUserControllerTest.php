@@ -2,17 +2,22 @@
 
 namespace Tests\Feature\Api;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Jobs\ProcessStoreBulkUser;
+use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class CreateManyUserControllerTest extends TestCase
 {
     public function test_process()
     {
-        $response = $this->get('mass-user');
+        Queue::fake();
+
+        $response = $this->get('api/mass-user');
+
+        Queue::assertPushed(ProcessStoreBulkUser::class);
+
         $response->assertStatus(200);
-        $response->assertJsonStructure([
+        $response->assertJson([
             'message' => 'success store mass user'
         ]);
     }

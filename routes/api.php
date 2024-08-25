@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\UserManagementController;
+use App\Http\Controllers\Api\CreateManyUserController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -21,3 +22,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
    Route::put('/users/{user}', [UserManagementController::class, 'update']);
    Route::delete('users/{user}', [UserManagementController::class, 'destroy']);
 });
+
+Route::get('mass-user', CreateManyUserController::class);
