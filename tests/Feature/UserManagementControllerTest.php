@@ -135,7 +135,7 @@ class UserManagementControllerTest extends TestCase
    {
        $user = User::factory()->create();
 
-       $response = $this->delete(route('user-management.destroy', $user->id));
+       $response = $this->actingAs($user)->delete(route('user-management.destroy', $user->id));
        $response->assertStatus(302);
        $response->assertRedirect(route('user-management.index'));
        $response->assertSessionHas('success', 'User deleted successfully');
