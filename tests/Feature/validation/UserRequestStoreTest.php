@@ -8,13 +8,10 @@ use Tests\TestCase;
 
 class UserRequestStoreTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
+    public function test_authorization()
     {
-        $response = $this->get('/');
+        $request = new UserRequestStore();
 
-        $response->assertStatus(200);
+        $this->assertTrue($request->authorize());
     }
 }
