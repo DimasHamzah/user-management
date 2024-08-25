@@ -41,15 +41,9 @@ class UserManagementController extends Controller
             ->setStatusCode(201);
     }
 
-    public function update(UserRequestUpdate $request, User $user)
+    public function update(UserRequestUpdate $request, User $user): JsonResponse
     {
         $validated = $request->validated();
-
-        if (isset($validated['password'])) {
-
-            $user->password = Hash::make($validated['password']);
-
-        }
 
         $user->update($validated);
 
@@ -59,8 +53,10 @@ class UserManagementController extends Controller
         ]);
     }
 
-    public function destroy()
+    public function destroy(User $user): JsonResponse
     {
+        $user->delete();
 
+        return response()->json(['message' => 'Success Delete User']);
     }
 }

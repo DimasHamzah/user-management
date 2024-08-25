@@ -77,4 +77,61 @@ class UserManagementControllerApiTest extends TestCase
             return $mail->hasTo($data['email']);
         });
     }
+
+    public function test_update_invalid_when_token_not_found()
+    {
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => ''
+        ])->put('/api/users/1');
+
+        $response->assertStatus(401);
+        $response->assertJson([
+            'message' => 'Unauthenticated.'
+        ]);
+    }
+
+    public function test_update_success()
+    {
+        $user = User::factory()->create();
+
+        $data = [
+            'name' => 'testing',
+            'email' => fake()->unique()->email,
+            'password' => 'Password'
+        ];
+
+        $response = $this->actingAs($user)->put('/api/users/' . $user->id , $data);
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'message' => 'Success Update User',
+            'data' => [
+                'name' => $data['name'],
+                'email' => $data['email']
+            ]
+        ]);
+    }
+
+    public function test_delete_failed_when_token_not_found()
+    {
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => ''
+        ])->delete('/api/users/1');
+
+        $response->assertStatus(401);
+        $response->assertJson([
+            'message' => 'Unauthenticated.'
+        ]);
+    }
+
+    public function test_delete_success()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->delete('/api/users/'.$user->id);
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'message' => 'Success Delete User'
+        ]);
+    }
 }
