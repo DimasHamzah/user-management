@@ -10,11 +10,11 @@
 - ** Email Confirmation After User Creation (Implement Queue): **
     - Setelah pembuatan pengguna baru, email konfirmasi dikirim menggunakan sistem antrian Laravel. Penggunaan queue memungkinkan pengiriman email dilakukan secara asynchronous untuk meningkatkan performa aplikasi. Implementasi ini menggunakan Laravel's built-in queue system yang terhubung dengan driver queue yang sesuai
 - ** API Endpoint for Mass User Creation **
-    - Saya telah membuat endpoint API khusus untuk pembuatan pengguna massal yang mampu menangani hingga 1000 email dan password dalam satu panggilan. Endpoint ini menerima data dalam body permintaan dan memprosesnya menggunakan queue untuk memastikan efisiensi dan performa saat menangani volume data besar
+    - Saya telah membuat endpoint API khusus untuk pembuatan pengguna massal yang mampu menangani hingga 1000 email dan password dalam satu panggilan. untuk  mass user saya membuat dua, yaitu get (api/mass-user) dan post (api/mass-user/body), kenapa membuat dua, karena dari pada memasukan 1000 data melalui postman lebih baik saya buatkan faker di queuenya, tetapi jika mau menggunakan yang postman, maka gunakan  api/mass-user/body
+
 
 ## catatan
-Dokumentasi ini menjelaskan rute-rute yang tersedia dalam aplikasi, termasuk API dan web. untuk  mass user saya membuat dua, yaitu get (api/mass-user) dan post (api/mass-user/body), kenapa membuat dua, karena dari pada memasukan 1000 data melalui postman lebih baik saya buatkan faker di queuenya, tetapi jika mau menggunakan yang postman, maka gunakan  api/mass-user/body
-
+Dokumentasi ini menjelaskan rute-rute yang tersedia dalam aplikasi, termasuk API dan web
 ## Rute API
 
 ### 1. **Autentikasi API**
