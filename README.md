@@ -1,66 +1,121 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Dokumentasi API Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Dokumentasi ini menjelaskan rute yang tersedia dalam aplikasi Laravel Anda, dibagi menjadi dua kategori: **Rute Web** dan **Rute API**.
 
-## About Laravel
+## Rute Web
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 1. **Root Route**
+- **URL**: `/`
+- **Method**: `GET|HEAD`
+- **Deskripsi**: Halaman utama aplikasi.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 2. **Dashboard**
+- **URL**: `dashboard`
+- **Method**: `GET|HEAD`
+- **Deskripsi**: Halaman dashboard pengguna.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 3. **Email Verification**
+- **Verification Notification**
+  - **URL**: `email/verification-notification`
+  - **Method**: `POST`
+  - **Controller**: `Auth\EmailVerificationNotificationController@store`
+  - **Deskripsi**: Mengirimkan email verifikasi ulang.
 
-## Learning Laravel
+- **Verify Email**
+  - **URL**: `verify-email`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `Auth\EmailVerificationPromptController`
+  - **Deskripsi**: Menampilkan halaman verifikasi email.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+  - **URL**: `verify-email/{id}/{hash}`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `Auth\VerifyEmailController`
+  - **Deskripsi**: Mengonfirmasi email verifikasi.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 4. **Profile Management**
+- **Profile Edit**
+  - **URL**: `profile`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `ProfileController@edit`
+  - **Deskripsi**: Menampilkan halaman edit profil pengguna.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+  - **URL**: `profile`
+  - **Method**: `PATCH`
+  - **Controller**: `ProfileController@update`
+  - **Deskripsi**: Memperbarui data profil pengguna.
 
-## Laravel Sponsors
+  - **URL**: `profile`
+  - **Method**: `DELETE`
+  - **Controller**: `ProfileController@destroy`
+  - **Deskripsi**: Menghapus profil pengguna.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Rute API
 
-### Premium Partners
+### 1. **Autentikasi API**
+- **Login**
+  - **URL**: `api/auth/login`
+  - **Method**: `POST`
+  - **Controller**: `Api\AuthenticationController`
+  - **Deskripsi**: Melakukan login pengguna.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **Register**
+  - **URL**: `api/register`
+  - **Method**: `POST`
+  - **Controller**: `Api\RegisterController`
+  - **Deskripsi**: Mendaftarkan pengguna baru.
 
-## Contributing
+- **Logout**
+  - **URL**: `api/logout`
+  - **Method**: `POST`
+  - **Controller**: `Auth\AuthenticatedSessionController@destroy`
+  - **Deskripsi**: Melakukan logout pengguna.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2. **User Management API**
+- **List Users**
+  - **URL**: `api/users`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `Api\UserManagementController@index`
+  - **Deskripsi**: Menampilkan daftar pengguna.
 
-## Code of Conduct
+- **Create User**
+  - **URL**: `api/users`
+  - **Method**: `POST`
+  - **Controller**: `Api\UserManagementController@store`
+  - **Deskripsi**: Menambahkan pengguna baru.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Update User**
+  - **URL**: `api/users/{user}`
+  - **Method**: `PUT`
+  - **Controller**: `Api\UserManagementController@update`
+  - **Deskripsi**: Memperbarui data pengguna.
 
-## Security Vulnerabilities
+- **Delete User**
+  - **URL**: `api/users/{user}`
+  - **Method**: `DELETE`
+  - **Controller**: `Api\UserManagementController@destroy`
+  - **Deskripsi**: Menghapus pengguna.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 3. **Mass User Creation API**
+- **Mass User Creation**
+  - **URL**: `api/mass-user`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `Api\CreateManyUserController`
+  - **Deskripsi**: Endpoint untuk memproses pembuatan pengguna massal secara otomatis.
 
-## License
+- **Mass User Creation with Body**
+  - **URL**: `api/mass-user/body`
+  - **Method**: `POST`
+  - **Controller**: `Api\MassUserController`
+  - **Deskripsi**: Mengirimkan data pengguna dalam jumlah besar melalui body permintaan.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 4. **CSRF Cookie**
+- **URL**: `sanctum/csrf-cookie`
+- **Method**: `GET|HEAD`
+- **Controller**: `Laravel\Sanctum\CsrfCookieController@show`
+- **Deskripsi**: Mengambil cookie CSRF untuk Laravel Sanctum.
+
+## Catatan
+- **Manajemen Profil**: Rute manajemen profil telah dihapus dari dokumentasi ini sesuai permintaan.
+- **Pemisahan Rute**: Rute telah dipisahkan berdasarkan kategori untuk memudahkan pemahaman dan pengelolaan.
+
+Dokumentasi ini dirancang untuk memberikan panduan lengkap mengenai rute web dan API dalam aplikasi Laravel Anda. Pastikan untuk memeriksa detail implementasi pada kode sumber dan menyesuaikan dengan kebutuhan spesifik proyek Anda.
