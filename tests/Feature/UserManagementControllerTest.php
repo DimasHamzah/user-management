@@ -25,4 +25,21 @@ class UserManagementControllerTest extends TestCase
        $response->assertViewHas('users');
        $response->assertViewIs('users.index');
    }
+
+   public function test_create_when_dont_have_permission()
+   {
+       $response = $this->get(route('user-management.create'));
+       $response->assertStatus(302);
+       $response->assertRedirect(route('login'));
+   }
+
+   public function test_create_when_have_permission()
+   {
+       $user = User::factory()->create();
+
+       $response = $this->actingAs($user)->get(route('user-management.create'));
+       $response->assertStatus(200);
+       $response->assertViewHas('users.create');
+
+   }
 }
