@@ -70,10 +70,6 @@ class UserManagementController extends Controller
     {
         $validated = $request->validated();
 
-        if (isset($validated['password'])) {
-            $user_management->password = Hash::make($validated['password']);
-        }
-
         $user_management->update($validated);
 
         return redirect()->route('user-management.index')->with('success', 'User updated successfully');

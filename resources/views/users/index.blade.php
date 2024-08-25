@@ -23,7 +23,7 @@
                             <x-item.text-list :label="$user->name" />
                             <x-item.text-list :label="$user->created_at" />
                             <td class="px-6 py-4 flex space-x-4">
-                                <x-button.button-update />
+                                <x-button.button-update :id="$user->id"/>
                                 <form action="{{ route('user-management.update', $user) }}" method="post">
                                     @csrf
                                     @method('delete')
