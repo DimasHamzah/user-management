@@ -3,6 +3,7 @@
 namespace Tests\Feature\validation;
 
 use App\Http\Requests\UserRequestStore;
+use Illuminate\Support\Facades\Validator;
 use Tests\TestCase;
 
 class UserRequestStoreTest extends TestCase
@@ -27,5 +28,31 @@ class UserRequestStoreTest extends TestCase
         $this->assertEquals('required|string', $rules['name']);
         $this->assertEquals('required|string|email:rfc,dns|unique:users,email', $rules['email']);
         $this->assertEquals('required|string', $rules['password']);
+    }
+
+    public function test_valid_user_request()
+    {
+        $data = [
+            'name' => 'testing',
+            'email' => 'testing@gmail.com',
+            'password' => '123456',
+        ];
+
+        $request = new UserRequestStore();
+        $request->replace($data);
+
+        $validator = Validator::make($request->all(), $request->rules());
+        $this->assertFalse($validator->fails());
+    }
+
+    public function test_invalid_user_request()
+    {
+        $data = [];
+
+        $request = new UserRequestStore();
+        $request->replace($data);
+
+        $validator = Validator::make($request->all(), $request->rules());
+        $this->assertTrue($validator->fails());
     }
 }
