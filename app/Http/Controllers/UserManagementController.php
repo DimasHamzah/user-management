@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequestStore;
+use App\Mail\ConfirmationCreateUser;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class UserManagementController extends Controller
@@ -29,9 +34,17 @@ class UserManagementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequestStore $request): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        $user = new User($validated);
+        $user->password = Hash::make($validated['password']);
+        $user->save();
+
+        Mail::to($user->email)->send(new ConfirmationCreateUser($user));
+
+        return redirect()->route('user-management.index')->with('success', 'User created successfully');
     }
 
     /**

@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Mail\ConfirmationCreateUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class UserManagementControllerTest extends TestCase
@@ -51,6 +53,8 @@ class UserManagementControllerTest extends TestCase
 
    public function test_store_when_have_permission()
    {
+       Mail::fake();
+
        $user = User::factory()->create();
 
        $data = [
@@ -62,7 +66,11 @@ class UserManagementControllerTest extends TestCase
        $response = $this->actingAs($user)->post(route('user-management.store'), $data);
        $response->assertStatus(302);
        $response->assertRedirect(route('user-management.index'));
-       $response->assertSessionHas('success', 'success create user');
+       $response->assertSessionHas('success', 'User created successfully');
+
+       Mail::assertQueued(ConfirmationCreateUser::class, function ($mail) use ($data) {
+           return $mail->hasTo($data['email']);
+       });
    }
 
 }
