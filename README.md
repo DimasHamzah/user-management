@@ -1,5 +1,11 @@
-# Dokumentasi Rute Aplikasi
+![image](https://github.com/user-attachments/assets/57ad36cd-6d68-41a4-adf6-1ffda3d4a665)# Dokumentasi Rute Aplikasi
 
+## requirment
+- ** Setup Laravel Project with Basic Authentication: **
+    - ** Saya telah menyiapkan proyek Laravel dengan otentikasi dasar menggunakan Laravel Breeze untuk antarmuka web. Proyek ini menyediakan fitur login dan registrasi yang diperlukan untuk mengakses dashboard. Untuk otentikasi API, saya menggunakan Laravel Sanctum untuk menyediakan token-based authentication, memungkinkan akses API yang aman.**     
+-     
+
+## catatan
 Dokumentasi ini menjelaskan rute-rute yang tersedia dalam aplikasi, termasuk API dan web. untuk  mass user saya membuat dua, yaitu get (api/mass-user) dan post (api/mass-user/body), kenapa membuat dua, karena dari pada memasukan 1000 data melalui postman lebih baik saya buatkan faker di queuenya, tetapi jika mau menggunakan yang postman, maka gunakan  api/mass-user/body
 
 ## Rute API
