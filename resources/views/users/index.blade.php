@@ -5,7 +5,7 @@
                {{ __('User Management') }}
            </h2>
 
-           <a href="#" class="flex space-x-2 bg-blue-700 px-4 py-2 rounded cursor-pointer">
+           <a href="{{ route('user-management.create') }}" class="flex space-x-2 bg-blue-700 px-4 py-2 rounded cursor-pointer">
                <x-icon.create-user-icon />
                <p class="text-base text-white font-bold">Create User</p>
            </a>
