@@ -1,66 +1,183 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Dokumentasi API Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Dokumentasi ini menjelaskan rute web yang tersedia dalam aplikasi Laravel Anda, termasuk endpoint untuk autentikasi, manajemen pengguna, dan lainnya.
 
-## About Laravel
+## Rute Web
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 1. **Root Route**
+- **URL**: `/`
+- **Method**: `GET|HEAD`
+- **Controller**: -
+- **Deskripsi**: Halaman utama aplikasi.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 2. **Autentikasi**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Login**
+  - **URL**: `api/auth/login`
+  - **Method**: `POST`
+  - **Controller**: `Api\AuthenticationController`
+  - **Deskripsi**: Melakukan login pengguna.
 
-## Learning Laravel
+- **Register**
+  - **URL**: `api/register`
+  - **Method**: `POST`
+  - **Controller**: `Api\RegisterController`
+  - **Deskripsi**: Mendaftarkan pengguna baru.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Logout**
+  - **URL**: `POST /logout`
+  - **Method**: `POST`
+  - **Controller**: `Auth\AuthenticatedSessionController@destroy`
+  - **Deskripsi**: Melakukan logout pengguna.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Confirm Password**
+  - **URL**: `confirm-password`
+  - **Method**: `GET|HEAD` (Tampilkan halaman konfirmasi password)
+  - **Method**: `POST` (Kirim konfirmasi password)
+  - **Controller**: `Auth\ConfirmablePasswordController`
+  - **Deskripsi**: Mengkonfirmasi password saat melakukan aksi tertentu.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Forgot Password**
+  - **URL**: `forgot-password`
+  - **Method**: `GET|HEAD` (Tampilkan halaman permintaan reset password)
+  - **Method**: `POST` (Kirim permintaan reset password)
+  - **Controller**: `Auth\PasswordResetLinkController`
+  - **Deskripsi**: Mengirimkan link untuk reset password.
 
-## Laravel Sponsors
+- **Reset Password**
+  - **URL**: `reset-password`
+  - **Method**: `POST`
+  - **Controller**: `Auth\NewPasswordController@store`
+  - **Deskripsi**: Menyimpan password baru setelah reset.
+  - **URL**: `reset-password/{token}`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `Auth\NewPasswordController@create`
+  - **Deskripsi**: Tampilkan halaman untuk membuat password baru.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. **Dashboard**
+- **URL**: `dashboard`
+- **Method**: `GET|HEAD`
+- **Controller**: -
+- **Deskripsi**: Halaman dashboard pengguna.
 
-### Premium Partners
+### 4. **Email Verification**
+- **Verification Notification**
+  - **URL**: `email/verification-notification`
+  - **Method**: `POST`
+  - **Controller**: `Auth\EmailVerificationNotificationController@store`
+  - **Deskripsi**: Mengirimkan email verifikasi ulang.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **Verify Email**
+  - **URL**: `verify-email`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `Auth\EmailVerificationPromptController`
+  - **Deskripsi**: Menampilkan halaman verifikasi email.
 
-## Contributing
+  - **URL**: `verify-email/{id}/{hash}`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `Auth\VerifyEmailController`
+  - **Deskripsi**: Mengonfirmasi email verifikasi.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5. **Profile Management**
+- **View Profile**
+  - **URL**: `profile`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `ProfileController@edit`
+  - **Deskripsi**: Menampilkan halaman edit profil.
 
-## Code of Conduct
+- **Update Profile**
+  - **URL**: `profile`
+  - **Method**: `PATCH`
+  - **Controller**: `ProfileController@update`
+  - **Deskripsi**: Memperbarui informasi profil pengguna.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Delete Profile**
+  - **URL**: `profile`
+  - **Method**: `DELETE`
+  - **Controller**: `ProfileController@destroy`
+  - **Deskripsi**: Menghapus profil pengguna.
 
-## Security Vulnerabilities
+### 6. **User Management API**
+- **List Users**
+  - **URL**: `api/users`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `Api\UserManagementController@index`
+  - **Deskripsi**: Menampilkan daftar pengguna.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Create User**
+  - **URL**: `api/users`
+  - **Method**: `POST`
+  - **Controller**: `Api\UserManagementController@store`
+  - **Deskripsi**: Menambahkan pengguna baru.
 
-## License
+- **Update User**
+  - **URL**: `api/users/{user}`
+  - **Method**: `PUT`
+  - **Controller**: `Api\UserManagementController@update`
+  - **Deskripsi**: Memperbarui data pengguna.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Delete User**
+  - **URL**: `api/users/{user}`
+  - **Method**: `DELETE`
+  - **Controller**: `Api\UserManagementController@destroy`
+  - **Deskripsi**: Menghapus pengguna.
+
+### 7. **Mass User Creation API**
+- **Mass User Creation**
+  - **URL**: `api/mass-user`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `Api\CreateManyUserController`
+  - **Deskripsi**: Menampilkan halaman atau endpoint untuk membuat pengguna dalam jumlah besar.
+
+- **Mass User Creation with Body**
+  - **URL**: `api/mass-user/body`
+  - **Method**: `POST`
+  - **Controller**: `Api\MassUserController`
+  - **Deskripsi**: Mengirimkan data pengguna dalam jumlah besar untuk diproses.
+
+### 8. **CSRF Cookie**
+- **URL**: `sanctum/csrf-cookie`
+- **Method**: `GET|HEAD`
+- **Controller**: `Laravel\Sanctum\CsrfCookieController@show`
+- **Deskripsi**: Mengambil cookie CSRF untuk Laravel Sanctum.
+
+### 9. **User Management (Web Routes)**
+- **List User Management**
+  - **URL**: `user-management`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `UserManagementController@index`
+  - **Deskripsi**: Menampilkan daftar manajemen pengguna.
+
+- **Create User Management**
+  - **URL**: `user-management/create`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `UserManagementController@create`
+  - **Deskripsi**: Menampilkan form untuk membuat manajemen pengguna baru.
+
+- **Show User Management**
+  - **URL**: `user-management/{user_management}`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `UserManagementController@show`
+  - **Deskripsi**: Menampilkan detail manajemen pengguna.
+
+- **Update User Management**
+  - **URL**: `user-management/{user_management}`
+  - **Method**: `PUT|PATCH`
+  - **Controller**: `UserManagementController@update`
+  - **Deskripsi**: Memperbarui manajemen pengguna.
+
+- **Delete User Management**
+  - **URL**: `user-management/{user_management}`
+  - **Method**: `DELETE`
+  - **Controller**: `UserManagementController@destroy`
+  - **Deskripsi**: Menghapus manajemen pengguna.
+
+- **Edit User Management**
+  - **URL**: `user-management/{user_management}/edit`
+  - **Method**: `GET|HEAD`
+  - **Controller**: `UserManagementController@edit`
+  - **Deskripsi**: Menampilkan form untuk mengedit manajemen pengguna.
+
+---
+
+Dokumentasi ini dirancang untuk memberikan panduan lengkap mengenai rute web dalam aplikasi Laravel Anda. Pastikan untuk memeriksa detail implementasi pada kode sumber dan menyesuaikan dengan kebutuhan spesifik proyek Anda.
