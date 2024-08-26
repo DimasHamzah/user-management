@@ -11,6 +11,17 @@
     - Setelah pembuatan pengguna baru, email konfirmasi dikirim menggunakan sistem antrian Laravel. Penggunaan queue memungkinkan pengiriman email dilakukan secara asynchronous untuk meningkatkan performa aplikasi. Implementasi ini menggunakan Laravel's built-in queue system yang terhubung dengan driver queue yang sesuai
 - ** API Endpoint for Mass User Creation **
     - Saya telah membuat endpoint API khusus untuk pembuatan pengguna massal yang mampu menangani hingga 1000 email dan password dalam satu panggilan. untuk  mass user saya membuat dua, yaitu get (api/mass-user) dan post (api/mass-user/body), kenapa membuat dua, karena dari pada memasukan 1000 data melalui postman lebih baik saya buatkan faker di queuenya, tetapi jika mau menggunakan yang postman, maka gunakan  api/mass-user/body
+ 
+-- ** untuk send email saya menggunakan stmp**
+    - MAIL_MAILER=smtp
+    - MAIL_HOST=smtp.googlemail.com
+    - MAIL_PORT=587
+    - MAIL_USERNAME=dimashamzah434@gmail.com
+    - MAIL_PASSWORD=qjsxwcuehhqfhycl
+    - MAIL_ENCRYPTION=tls
+    - MAIL_FROM_ADDRESS="dimashamzah434@gmail.com"
+    - MAIL_FROM_NAME="Confirmation Your Account"
+-- ** untuk queue connection menggunakan database **
 
 
 ## catatan
