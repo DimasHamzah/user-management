@@ -21,7 +21,7 @@
     - MAIL_ENCRYPTION=tls
     - MAIL_FROM_ADDRESS="dimashamzah434@gmail.com"
     - MAIL_FROM_NAME="Confirmation Your Account"
--- ** untuk queue connection menggunakan database **
+- ** untuk queue connection menggunakan database **
 
 
 ## catatan
