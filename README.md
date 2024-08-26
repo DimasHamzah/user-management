@@ -1,5 +1,7 @@
 # Dokumentasi Rute Aplikasi
 
+- ** link collection post : https://github.com/DimasHamzah/test-collection-user.git **
+
 ## requirment
 - ** Setup Laravel Project with Basic Authentication: **
     -  Saya telah menyiapkan proyek Laravel dengan otentikasi dasar menggunakan Laravel Breeze untuk antarmuka web. Proyek ini menyediakan fitur login dan registrasi yang diperlukan untuk mengakses dashboard. Untuk otentikasi API, saya menggunakan Laravel Sanctum untuk menyediakan token-based authentication, memungkinkan akses API yang aman.    
